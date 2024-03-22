@@ -6,8 +6,8 @@ using namespace std;
 struct nodo{
 	int data;
 	nodo *next;
-	int priority;
-}*start=NULL;
+	int priority;	
+};
 
 void insert_pila(nodo *&list,int data,int priority);
 void insert_cola(nodo *&list,int data,int priority);
@@ -70,23 +70,14 @@ int main(){
 				break;
 			}
 			case 2:{
-				if(isPilas){
-					detele(list);
-				}
-				else{
-					detele(start);
-				}
 				
+				detele(list);
+					
 				system("pause");
 				break;
 			}
 			case 3:{
-				if(isPilas){
-					showList(list);
-				}
-				else{
-					showList(start);
-				}
+				showList(list);
 				
 				system("pause");
 				break;
@@ -112,7 +103,7 @@ void insert_pila(nodo *&list,int data,int priority){
 	nodo *aux1=list;
 	nodo *aux2;
 	
-	while(aux1!=NULL && aux1->priority<=priority){
+	while(aux1!=NULL && aux1->priority<priority){
 		aux2=aux1;
 		aux1=aux1->next;
 	}
@@ -131,37 +122,22 @@ void insert_cola(nodo *&list,int data,int priority){
 	nodo *newNodo= new nodo();
 	newNodo->data=data;
 	newNodo->priority=priority;
-		
-	
-	nodo *aux=list;
-	nodo *aux1=start;
+	nodo *aux1=list;
 	nodo *aux2;
-	bool entro=true;	
 	
 	while(aux1!=NULL && aux1->priority<=priority){
 		aux2=aux1;
 		aux1=aux1->next;
-		
-		entro=false;
 	}
 	
-	if(start==NULL){
-		start=newNodo;
-	}
-	
-	if(entro){		
+	if(aux1==list){
 		list=newNodo;
-		if(aux!=NULL){
-			aux->next=list;
-		}
-		newNodo->next=NULL;
-
+		
 	}
-	else{		
+	else{
 		aux2->next=newNodo;
-		newNodo->next=aux1;
-
 	}
+	newNodo->next=aux1;
 	
 	
 }
@@ -195,6 +171,5 @@ void detele(nodo *&list){
 	}
 
 }
-
 
 
